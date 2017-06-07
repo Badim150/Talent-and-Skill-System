@@ -10,12 +10,14 @@ public class SkillTree : MonoBehaviour {
     public List<Skill> m_learnedSkills;
     private List<SkillButton> m_buttons;
     public SkillButtonPool m_buttonObjectPool;
+    [SerializeField] private UILineRenderer m_lineRenderer;
+    private List<UIVertex> m_vertexList;
 
     [SerializeField] private GameObject tier1;
     [SerializeField] private GameObject tier2;
     [SerializeField] private GameObject tier3;
     [SerializeField] private GameObject tier4;
-
+    [SerializeField] private GameObject canvas;
 
     private void Start()
     {
@@ -53,9 +55,40 @@ public class SkillTree : MonoBehaviour {
 
             SkillButton skillButton = newButton.GetComponent<SkillButton>();
             skillButton.Setup(skill, this);
-            m_buttons.Add(skillButton);
+            m_buttons.Add(skillButton);   
+        }
+       // DrawConections();
+    }
+
+
+    private void DrawConections()
+    {
+        for (int i = 0; i < m_buttons.Count; i++)
+        {
+            if (m_buttons[i].m_skill.m_childOf.Count > 0)
+            {              
+                UIVertex ver1 = new UIVertex();
+                ver1.position = m_buttons[i].transform.position;
+                m_vertexList.Add(ver1);
+
+                for (int k = 0; k < m_buttons[i].m_skill.m_childOf.Count; k++)
+                {
+                    for (int j = 0; i < m_buttons.Count; i++)
+                    {
+                        if (m_buttons[j].m_skill.m_name == m_buttons[i].m_skill.m_childOf[k].m_name)
+                        {
+                            UIVertex ver2 = new UIVertex();
+                            ver2.position = m_buttons[j].transform.position;
+                            m_vertexList.Add(ver2);                            
+
+                           
+                        }
+                    }
+                }
+            }
         }
     }
+
     
     public void UpdateTree()
     {
@@ -79,3 +112,5 @@ public class SkillTree : MonoBehaviour {
         return false;
     }
 }
+
+

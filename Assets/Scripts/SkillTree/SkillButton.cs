@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour {
  
-    private Text m_nameField;
-    private Text m_descriptionField;
-    private Image m_iconImage;
-   // private Image m_PurchaseImage;
+    [SerializeField] private Text m_nameField;
+    [SerializeField] private Text m_descriptionField;
+    [SerializeField] public Image m_iconImage;
+    [SerializeField] private Image m_purchasedImage;
+    // private Image m_PurchaseImage;
 
-    private Skill m_skill;
+    public Skill m_skill;
     private SkillTree m_skillTree;
 
     public Button m_button;
@@ -21,7 +22,7 @@ public class SkillButton : MonoBehaviour {
         m_skillTree = skillTree;
         m_nameField.text = skill.m_name;
         m_iconImage.sprite = skill.m_icon;
-      
+        m_purchasedImage.enabled = false;
     }
 	
 	public void Learn()
@@ -30,6 +31,7 @@ public class SkillButton : MonoBehaviour {
         {
             m_skill.LearnSkill(); 
             m_skillTree.UpdateTree();
+            m_purchasedImage.enabled = true;
         }
         
     }
