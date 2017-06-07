@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
+
 
 public class SkillTree : MonoBehaviour {
 
@@ -10,7 +12,6 @@ public class SkillTree : MonoBehaviour {
     public List<Skill> m_learnedSkills;
     private List<SkillButton> m_buttons;
     public SkillButtonPool m_buttonObjectPool;
-    [SerializeField] private UILineRenderer m_lineRenderer;
     private List<UIVertex> m_vertexList;
 
     [SerializeField] private GameObject tier1;
@@ -18,6 +19,7 @@ public class SkillTree : MonoBehaviour {
     [SerializeField] private GameObject tier3;
     [SerializeField] private GameObject tier4;
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject m_lineRenderer;
 
     private void Start()
     {
@@ -57,7 +59,7 @@ public class SkillTree : MonoBehaviour {
             skillButton.Setup(skill, this);
             m_buttons.Add(skillButton);   
         }
-       // DrawConections();
+        DrawConections();
     }
 
 
@@ -66,22 +68,19 @@ public class SkillTree : MonoBehaviour {
         for (int i = 0; i < m_buttons.Count; i++)
         {
             if (m_buttons[i].m_skill.m_childOf.Count > 0)
-            {              
-                UIVertex ver1 = new UIVertex();
-                ver1.position = m_buttons[i].transform.position;
-                m_vertexList.Add(ver1);
-
+            {  
                 for (int k = 0; k < m_buttons[i].m_skill.m_childOf.Count; k++)
                 {
                     for (int j = 0; i < m_buttons.Count; i++)
                     {
                         if (m_buttons[j].m_skill.m_name == m_buttons[i].m_skill.m_childOf[k].m_name)
-                        {
-                            UIVertex ver2 = new UIVertex();
-                            ver2.position = m_buttons[j].transform.position;
-                            m_vertexList.Add(ver2);                            
+                        {                            
+                            GameObject line = Instantiate(m_lineRenderer, canvas.transform);
 
-                           
+
+
+                            line.GetComponent<UILineTextureRenderer>().Points[0] = m_buttons[i].transform.position;
+                            line.GetComponent<UILineTextureRenderer>().Points[1] = m_buttons[j].transform.position;
                         }
                     }
                 }
