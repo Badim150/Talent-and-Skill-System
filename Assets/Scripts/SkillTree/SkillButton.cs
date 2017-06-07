@@ -9,7 +9,7 @@ public class SkillButton : MonoBehaviour {
     [SerializeField] private Text m_descriptionField;
     [SerializeField] public Image m_iconImage;
     [SerializeField] private Image m_purchasedImage;
-    // private Image m_PurchaseImage;
+    
 
     public Skill m_skill;
     private SkillTree m_skillTree;
