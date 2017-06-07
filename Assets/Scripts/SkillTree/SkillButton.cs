@@ -23,6 +23,7 @@ public class SkillButton : MonoBehaviour {
         m_nameField.text = skill.m_name;
         m_iconImage.sprite = skill.m_icon;
         m_purchasedImage.enabled = false;
+        print(WhereAmIInTheCanvas());
     }
 	
 	public void Learn()
@@ -50,6 +51,12 @@ public class SkillButton : MonoBehaviour {
     public void HandleClick()
     {
         Learn();
-        print("clicked");     
+        print(WhereAmIInTheCanvas());
+    }
+
+    public Vector3 WhereAmIInTheCanvas()
+    {
+        RectTransform transform = this.gameObject.GetComponent<RectTransform>();
+        return transform.position;
     }
 }
