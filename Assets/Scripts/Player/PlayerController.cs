@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour {
     private void newActive(Skill skill)
     {
         m_actives.Add(skill);
+        m_actionBar.GetComponent<ActionBar>().getNextAvailableButton().Setup(skill);
     }
 
     private void newPassive(Skill skill)
     {
         m_passives.Add(skill);
+        m_passiveBar.GetComponent<PassiveBar>().NewPassive(skill);
     }
 }

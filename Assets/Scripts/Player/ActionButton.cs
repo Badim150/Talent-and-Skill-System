@@ -10,13 +10,14 @@ public class ActionButton : MonoBehaviour {
     [SerializeField] private Image m_iconImage;
 
     private Skill m_skill;
-    public bool isActive = false;
+    public bool m_isActive = false;
 
     public void Setup(Skill skill)
     {
         m_skill = skill;
         m_nameField.text = skill.m_name;
         m_iconImage.sprite = skill.m_icon;
+        m_isActive = true;     
     }
 
     public void HandleClick()

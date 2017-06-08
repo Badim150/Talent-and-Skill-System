@@ -13,17 +13,18 @@ public class SkillButton : MonoBehaviour {
 
     public Skill m_skill;
     private SkillTree m_skillTree;
+    private PlayerController m_playerController;
 
     public Button m_button;
        
-    public void Setup(Skill skill, SkillTree skillTree)
+    public void Setup(Skill skill, SkillTree skillTree, PlayerController playerController)
     {
         m_skill = skill;
         m_skillTree = skillTree;
+        m_playerController = playerController;
         m_nameField.text = skill.m_name;
         m_iconImage.sprite = skill.m_icon;
-        m_purchasedImage.enabled = false;
-        print(WhereAmIInTheCanvas());
+        m_purchasedImage.enabled = false;        
     }
 	
 	public void Learn()
@@ -33,8 +34,8 @@ public class SkillButton : MonoBehaviour {
             m_skill.LearnSkill(); 
             m_skillTree.UpdateTree();
             m_purchasedImage.enabled = true;
-        }
-        
+            m_playerController.NewSkill(m_skill);
+        }        
     }
 
     public bool IsActive()
@@ -50,8 +51,7 @@ public class SkillButton : MonoBehaviour {
 
     public void HandleClick()
     {
-        Learn();
-        print(WhereAmIInTheCanvas());
+        Learn();      
     }
 
     public Vector3 WhereAmIInTheCanvas()

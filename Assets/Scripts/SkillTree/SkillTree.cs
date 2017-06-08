@@ -16,12 +16,14 @@ public class SkillTree : MonoBehaviour {
     public SkillButtonPool m_buttonObjectPool;
     private List<UIVertex> m_vertexList;
 
+    [SerializeField] private PlayerController m_playerController;
     [SerializeField] private GameObject tier1;
     [SerializeField] private GameObject tier2;
     [SerializeField] private GameObject tier3;
     [SerializeField] private GameObject tier4;
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject m_lineRenderer;
+
 
     private void Awake()
     {
@@ -69,7 +71,7 @@ public class SkillTree : MonoBehaviour {
             }
 
             SkillButton skillButton = newButton.GetComponent<SkillButton>();
-            skillButton.Setup(skill, this);
+            skillButton.Setup(skill, this, m_playerController);
             m_buttons.Add(skillButton);   
         }
      

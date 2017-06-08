@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActionBar : MonoBehaviour {
 
@@ -10,14 +11,14 @@ public class ActionBar : MonoBehaviour {
 
     private void Awake()
     {       
-        List<ActionButton> list = GetComponentsInChildren<ActionButton>().ToList<ActionButton>();
+        m_buttons = GetComponentsInChildren<ActionButton>().ToList<ActionButton>();       
     }
 
     public ActionButton getNextAvailableButton()
     {
         for (int i = 0; i < m_buttons.Count; i++)
         {
-            if (!m_buttons[i].isActive) return m_buttons[i];
+            if (!m_buttons[i].m_isActive) return m_buttons[i];
         }
         return null;
     }
